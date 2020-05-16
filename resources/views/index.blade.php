@@ -48,7 +48,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!--end::Head-->
 
 	<!--begin::Body-->
-	<body id="kt_body" style="background-image: url(assets/media/bg/bg-10.jpg)" class="quick-panel-right demo-panel-right offcanvas-right header-fixed subheader-enabled page-loading">
+	<body id="kt_body" style="background-image: url({{asset('assets/media/bg/bg-10.jpg') }})" class="quick-panel-right demo-panel-right offcanvas-right header-fixed subheader-enabled page-loading">
 
 		@include("layout")
 
@@ -60,7 +60,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		@include("partials/_extras/toolbar")
 
-		@include("partials/_extras/offcanvas/demo-panel")
+		{{-- @include("partials/_extras/offcanvas/demo-panel") --}}
 		<script>
 			var HOST_URL = "https://keenthemes.com/metronic/tools/preview";
 		</script>

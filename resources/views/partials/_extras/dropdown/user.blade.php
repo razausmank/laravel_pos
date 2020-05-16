@@ -4,7 +4,7 @@
 
 	<!--begin::Symbol-->
 	<div class="symbol symbol-md bg-light-primary mr-3 flex-shrink-0">
-		<img src="assets/media/users/300_21.jpg" alt="" />
+		<img src="{{ asset('c/users/300_21.jpg') }}" alt="" />
 	</div>
 
 	<!--end::Symbol-->
