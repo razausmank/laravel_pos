@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::resource('page', 'PageController');
+
+Route::resource('user', 'UserController');
+
 Route::get('/', function () {
     return view('index');
 });
 
 
-Route::get('/pages/create', function () {
-    return view('index');
-});

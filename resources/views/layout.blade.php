@@ -17,7 +17,9 @@
 
 				@include("partials/_subheader")
 
-				@include("partials/_content")
+                @include("partials/_content")
+
+
 			</div>
 
 			<!--end::Content-->
