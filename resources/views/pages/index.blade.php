@@ -1,4 +1,7 @@
-<x-master>
+<x-master >
+
+
+
     <x-cards.basic-card title="All Pages" subtitle="List of all pages">
         <table class="table">
             <thead>
@@ -9,6 +12,8 @@
                     <th>Sort Order</th>
                     <th>Parent Page Id</th>
                     <th>Created At</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,13 +25,27 @@
                         <td>{{ $page->sort_order }}</td>
                         <td>{{ $page->parent_page_id }}</td>
                         <td>{{ $page->created_at->diffForHumans() }}</td>
+                        <td><a href="{{ route('page.edit' , $page) }}" class="btn btn-primary mr-2">Edit</a></td>
+                        <td>
+                            <form action="{{ route('page.destroy', $page) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                                <button type="submit" class="btn btn-danger mr-2">Delete</button>
+                            </form>
+
+                        </td>
+
                     </tr>
                 @endforeach
             </tbody>
         </table>
 
-        </ul>
+
 
     </x-cards.basic-card>
 
 </x-master>
+
+
+
+

@@ -42,7 +42,10 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--begin::Layout Themes(used by all pages)-->
 
 		<!--end::Layout Themes-->
-		<link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+        <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+
+         <!-- jstree -->
+         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/themes/default/style.min.css" />
 	</head>
 
 	<!--end::Head-->
@@ -124,12 +127,17 @@ License: You must have a valid license purchased only from themeforest(the above
 					}
 				},
 				"font-family": "Poppins"
-			};
+            };
+
 		</script>
 
 		<!--end::Global Config-->
 
-		<!--begin::Global Theme Bundle(used by all pages)-->
+       <!-- hidden fields:-->
+
+            <input type="hidden" name="absolute_path" id=""  value="{{ asset('') }}">
+
+        <!--begin::Global Theme Bundle(used by all pages)-->
 		<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
 		<script src="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
 		<script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
@@ -144,7 +152,16 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="{{ asset('assets/js/pages/widgets.js') }}"></script>
 
-		<!--end::Page Scripts-->
+        <!--end::Page Scripts-->
+
+        <!-- compiled js app.js -->
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+
+		<!-- compiled css app.css -->
+
+		<!-- jstree -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/jstree.min.js"></script>
+
 	</body>
 
 	<!--end::Body-->

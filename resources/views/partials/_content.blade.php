@@ -4,7 +4,7 @@
 
 	<!--begin::Container-->
 	<div class=" container ">
-            {{ $slot }}
+            {{ $slot ?? '' }}
 	</div>
 
 	<!--end::Container-->

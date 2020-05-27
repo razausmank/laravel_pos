@@ -11,6 +11,19 @@ class User extends Model
         'last_name' ,
         'username',
         'email',
-        'password'
+        'password',
+        'usertype_id'
     ];
+
+    //ORM Relationships
+
+    public function usertype()
+    {
+        return $this->belongsTo( UserType::class  );
+    }
+
+    public function pages()
+    {
+        return $this->belongsToMany( Page::class )->withTimestamps();
+    }
 }

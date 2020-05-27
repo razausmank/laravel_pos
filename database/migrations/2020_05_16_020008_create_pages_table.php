@@ -18,7 +18,7 @@ class CreatePagesTable extends Migration
             $table->string('name');
             $table->string('url');
             $table->string('description')->nullable();
-            $table->integer('sort_order');
+            $table->integer('sort_order')->unique();
 
             $table->foreignId('parent_page_id')->nullable()->constrained('pages');
             $table->foreignId('created_by')->nullable()->constrained('users');
