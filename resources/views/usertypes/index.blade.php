@@ -1,5 +1,5 @@
 <x-master>
-    <x-cards.basic-card title="User Type" subtitle="List of all the types of users">
+    <x-cards.basic-card title="User Type" subtitle="List of all the types of users" button_link="usertype.create" button_text="New User Type">
         <table class="table">
             <thead>
                 <tr>

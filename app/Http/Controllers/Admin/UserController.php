@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\MainController;
+use App\Http\Requests\UserRequest;
 use App\Page;
 use App\User;
 use App\UserType;
@@ -28,23 +30,13 @@ class UserController extends MainController
 
     // Hash::make($request->newPassword)
 
-    public function store()
+    public function store( UserRequest $request )
     {
-        request()->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'username' => ['required', 'unique:users'],
-            'email' => ['required', 'unique:users'],
-            'password' => ['required', 'min:6'],
-            'usertype_id' => 'exists:user_types,id'
-        ]);
-        User::create([
-            'first_name' => request('first_name'),
-            'last_name' => request('last_name'),
-            'username' => request('username'),
-            'email' => request('email'),
+        $validated = $request->validated();
+        unset($validated['password']);
+
+        User::create( $validated + [
             'password' => Hash::make( request('password')),
-            'usertype_id' => request('usertype_id')
         ]);
 
         return redirect(route('user.index'))->with('success', 'User Created Succesfully');
@@ -57,26 +49,15 @@ class UserController extends MainController
         return view('users.edit', compact('user', 'usertypes'));
     }
 
-    public function update( User $user )
+    public function update( User $user, UserRequest $request)
     {
-        request()->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'username' => ['required', 'unique:users'.$user->id],
-            'email' => ['required', 'unique:users'.$user->id],
-            'password' => ['required', 'min:6'],
-            'usertype_id' => 'exists:user_types,id'
-        ]);
+        $validated = $request->validated();
+        unset($validated['password']);
 
-        $user->update([
-            'first_name' => request('first_name'),
-            'last_name' => request('last_name'),
-            'username' => request('username'),
-            'email' => request('email'),
-            'password' => Hash::make( request('password')),
-            'usertype_id' => request('usertype_id')
-
-        ]);
+        $user->update( $validated + [
+                'password' => Hash::make( request('password')),
+            ]
+        );
 
         return redirect(route('user.index'))->with('success', 'User Updated Succesfully');
 

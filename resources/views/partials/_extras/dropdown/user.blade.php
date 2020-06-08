@@ -10,7 +10,7 @@
 	<!--end::Symbol-->
 
 	<!--begin::Text-->
-	<div class="text-dark m-0 flex-grow-1 mr-3 font-size-h5">Sean Stone</div>
+	<div class="text-dark m-0 flex-grow-1 mr-3 font-size-h5">{!! Helper::current_user()->get_full_name() !!}</div>
 	<span class="label label-light-success label-lg font-weight-bold label-inline">3 messages</span>
 
 	<!--end::Text-->
@@ -102,8 +102,14 @@
 	<!--begin::Footer-->
 	<div class="navi-separator mt-3"></div>
 	<div class="navi-footer  px-8 py-5">
-		<a href="custom/user/login-v2.html" target="_blank" class="btn btn-light-primary font-weight-bold">Sign Out</a>
-		<a href="custom/user/login-v2.html" target="_blank" class="btn btn-clean font-weight-bold">Upgrade Plan</a>
+        <a href="{{ route('logout') }}" id="logout_button" target="_self" class="btn btn-light-primary font-weight-bold">  {{ __('Logout') }}</a>
+
+        <form id="logout_form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+
+
+		<a href="custom/user/login-v2.html" target="_self" class="btn btn-clean font-weight-bold">Upgrade Plan</a>
 	</div>
 
 	<!--end::Footer-->

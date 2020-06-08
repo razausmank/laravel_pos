@@ -18,11 +18,16 @@ class CreatePagesTable extends Migration
             $table->string('name');
             $table->string('url');
             $table->string('description')->nullable();
-            $table->integer('sort_order')->unique();
+            $table->integer('sort_order');
 
             $table->foreignId('parent_page_id')->nullable()->constrained('pages');
+
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');
+            $table->foreignId('deleted_by')->nullable()->constrained('users');
+            $table->softDeletes();
+
+            $table->unique(['sort_order', 'deleted_at']);
 
             $table->timestamps();
         });

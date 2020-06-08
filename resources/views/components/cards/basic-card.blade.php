@@ -1,13 +1,34 @@
 <div class="card card-custom gutter-b">
 	<div class="card-header">
-		<div class="card-title">
+		<div class="card-title ">
 			<h3 class="card-label">
-				{{ $attributes['title'] }}
-				<small>{{ $attributes['subtitle'] }}</small>
-			</h3>
-		</div>
+                {{ $attributes['title'] }}
+                @if($attributes['subtitle'])
+                    <small>{{ $attributes['subtitle'] }}</small>
+                @endif
+            </h3>
+        </div>
+        <div class="card-title">
+            @if($attributes['button_link'])
+                <a href="{{ route( $attributes['button_link'] ) }}" class="btn btn-primary mr-2">{{ $attributes['button_text'] }}</a>
+            @endif
+        </div>
 	</div>
 	<div class="card-body">
 		{{ $slot }}
-	</div>
+    </div>
+    @if( $footer ?? '' )
+        <div class="card-footer">
+            {{ $footer  }}
+        </div>
+    @endif
 </div>
+
+
+
+{{-- Thats how you insert another component
+
+ <x-slot name="title">
+        message
+    </x-slot>
+--}}

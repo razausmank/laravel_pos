@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StorePage;
+use App\Http\Controllers\MainController;
+use App\Http\Requests\PageRequest;
 use App\Page;
 use Exception;
 use Illuminate\Http\Request;
+use App\Helpers\Helper;
 
 class PageController extends MainController
 {
@@ -21,15 +23,27 @@ class PageController extends MainController
     {
         $pages = Page::all();
 
-        return view('pages.create', compact('pages', 'menu') );
+          // gets all the routes and filters out only the index and create routes
+          $routes = collect(app('routes')->getRoutes())->map(function ($route) {
+            if (preg_match('(edit|show|update|destroy|store|ignition)', $route->getName() ) === 1 )
+            {
+                return false ;
+            }
+             return $route->getName();
+        })->filter( function($route){
+            return $route;
+        }) ;
+
+        return view('pages.create', compact('pages', 'routes') );
     }
 
 
-    public function store( StorePage $request )
-    {   
+    public function store( PageRequest $request )
+    {
+
         $validated = $request->validated();
 
-        Page::create($validated);
+        Page::create( $validated );
 
         return redirect(route('page.index'))->with('success', 'Page Created Succesfully');
     }
@@ -38,10 +52,20 @@ class PageController extends MainController
     {
         $pages = Page::all()->except($page->id);
 
-        return view('pages.edit', compact('pages', 'page'));
+        $routes = collect(app('routes')->getRoutes())->map(function ($route) {
+            if (preg_match('(edit|show|update|destroy|store|ignition)', $route->getName() ) === 1 )
+            {
+                return false ;
+            }
+             return $route->getName();
+        })->filter( function($route){
+            return $route;
+        }) ;
+
+        return view('pages.edit', compact('pages', 'page', 'routes'));
     }
 
-    public function update ( Page $page , StorePage $request)
+    public function update ( Page $page , PageRequest $request)
     {
 
         $validated = $request->validated();
@@ -57,7 +81,6 @@ class PageController extends MainController
         } catch( Exception $exception ) {
             return redirect(route('page.index'))->with('failure', 'Page Cannot be deleted, the page has sub pages');
         }
-        $page->destroy($page->id);
 
         return redirect(route('page.index'))->with('success', 'Page Deleted Succesfully');
     }
@@ -74,6 +97,7 @@ class PageController extends MainController
     public function updatePageHierarchy()
     {
         $response = json_decode(request('data'));
+
         foreach($response as $page_sort_order => $page)
         {
             $page_update = Page::find($page->id);

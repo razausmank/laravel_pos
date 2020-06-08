@@ -1,2 +1,35 @@
 add a trait that has date mutators
 https://github.com/alexeymezenin/laravel-best-practices#store-dates-in-the-standard-format-use-accessors-and-mutators-to-modify-date-format
+
+we can reformat the forms a little more and make them cleaner
+
+language
+
+reformat the login pages structure
+
+add validation to every form
+
+should i have page specific js and include that in every page or just in aap.js
+
+
+in add new page get all the registered routes and populate it as a dropdown insteal of asking for url or figure something out to solve this
+
+user updating requires password and that is a bit of a problem solve that , maybe remove the password field from there
+
+
+no of results in pagination , solve it if necessary
+
+the top most of the menu bar is still not clickable
+
+
+//Things to Ask
+
+1 - determine the basic UI for forms, tables etc.
+2 - associate in products and products category , is it one to one or many to many
+3 - do we need to have crud operation for products_stock ?
+4 - datatables selection
+5 - solved () : ask if we were supposed to use soft delete on all tables and explain what is the problem with soft deletes in unique identifier
+6 - login pages
+7-  Register page
+8-  should i have page specific js and include that in every page or just in aap.js
+

@@ -1,7 +1,7 @@
 
 
 <li class="menu-item  menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
-    <a href="javascript:;" class="menu-link menu-toggle" ><i class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">{{ $child_category->name }}</span>
+    <a href="{{ $child_category->url == "#" ? '#' : route($child_category->url)  }}" class="menu-link " ><i class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">{{ $child_category->name }}</span>
         @if( $child_category->pages->isNotEmpty() )
             <i class="menu-arrow"></i>
         @endif

@@ -9,7 +9,7 @@
             {{-- @foreach($menu as $menu_name => $menu_name_collection) --}}
             @foreach($pages as $parent_page )
 
-                <li class="menu-item  menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true"><a href="javascript:;" class="menu-link menu-toggle"><span class="menu-text">{{ $parent_page->name }} </span><span class="menu-desc"></span><i class="menu-arrow"></i></a>
+                <li class="menu-item  menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true"><a href="{{ $parent_page->url == "#" ? '#' : route($parent_page->url)  }}" class="menu-link menu-toggle"><span class="menu-text">{{ $parent_page->name }} </span><span class="menu-desc"></span><i class="menu-arrow"></i></a>
                     @if( $parent_page->sub_pages->isNotEmpty() )
                     <div class="menu-submenu menu-submenu-classic menu-submenu-left">
 
@@ -17,7 +17,7 @@
 
                             @foreach ($parent_page->sub_pages as $page)
 
-                                <li class="menu-item  menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true"><a href="javascript:;" class="menu-link menu-toggle"><span class="svg-icon menu-icon">
+                                <li class="menu-item  menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true"><a href="{{ $page->url == "#" ? '#' : route($page->url)  }}" class="menu-link "><span class="svg-icon menu-icon">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Gift.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                             <rect x="0" y="0" width="24" height="24" />

@@ -4,15 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Sofa\Eloquence\Mappable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Page extends Model
 {
+    use SoftDeletes ;
+
     protected $fillable = [
         'name',
         'url',
         'description',
         'sort_order',
         'parent_page_id',
+        'created_by',
+        'updated_by',
+        'deleted_by',
+
     ];
 
 

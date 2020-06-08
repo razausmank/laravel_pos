@@ -2,7 +2,13 @@
 
 namespace App\Providers;
 
+use App\Observers\ModelObserver;
 use App\Page;
+use App\Product;
+use App\ProductCategory;
+use App\ProductStock;
+use App\User;
+use App\UserType;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +31,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        // model observers
+
+        Page::observe(ModelObserver::class) ;
+        User::observe(ModelObserver::class) ;
+        UserType::observe(ModelObserver::class) ;
+        ProductCategory::observe(ModelObserver::class);
+        Product::observe(ModelObserver::class);
+        ProductStock::observe(ModelObserver::class);
+
         //partials._pages_menu
         View::composer('partials._pages_menu', function($view)
         {

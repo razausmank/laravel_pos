@@ -1,8 +1,8 @@
 <x-master >
 
+    <x-flash />
 
-
-    <x-cards.basic-card title="All Pages" subtitle="List of all pages">
+    <x-cards.basic-card title="All Pages" subtitle="List of all pages" button_link="page.create" button_text="New Page">
         <table class="table">
             <thead>
                 <tr>

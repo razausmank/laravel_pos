@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePage extends FormRequest
+class ProductCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +23,11 @@ class StorePage extends FormRequest
      */
     public function rules()
     {
-        $id = $this->request->get('_method') == "POST" ? ','  : $this->route('page')->id;
 
         return [
-            'name' => 'required',
-            'url' => 'required',
-            'sort_order' => ['required', 'unique:pages,sort_order,'.$id],
-            'parent_page_id' => ['nullable' , 'exists:pages,parent_page_id'.$id ]
+            'name' => ['required' , 'max:255'],
+            'description' => 'required',
+            'image' => ['nullable', 'image']
         ];
     }
 }

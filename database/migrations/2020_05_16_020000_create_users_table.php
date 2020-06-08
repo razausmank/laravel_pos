@@ -17,15 +17,20 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('username')->unique();
-            $table->string('email')->unique();
+            $table->string('username');
+            $table->string('email');
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
-            $table->foreignId('usertype_id')->constrained('user_types');
+
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');
-            $table->rememberToken();
+            $table->foreignId('deleted_by')->nullable()->constrained('users');
+            $table->softDeletes();
 
+            $table->unique(['username', 'deleted_at']);
+            $table->unique(['email', 'deleted_at']);
+
+            $table->rememberToken();
             $table->timestamps();
         });
     }

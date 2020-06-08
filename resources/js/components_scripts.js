@@ -1,82 +1,61 @@
+// page hierachy json
 
 
-// Page hierarchy tree
+$( document ).ready(function() {
+$('#page_hierarchy_js_tree_form_submit').on('click', function(e){
 
-$("#kt_tree_5").jstree({
-    "core": {
-        "themes": {
-            "responsive": false
-        },
-        // so that create works
-        "check_callback": true,
-        "data": [{
-                "text": "Parent Node",
-                "children": [{
-                    "text": "Initially selected",
-                    "state": {
-                        "selected": true
-                    }
-                }, {
-                    "text": "Custom Icon",
-                    "icon": "flaticon2-warning text-danger"
-                }, {
-                    "text": "Initially open",
-                    "icon": "fa fa-folder text-success",
-                    "state": {
-                        "opened": true
-                    },
-                    "children": [{
-                        "text": "Another node",
-                        "icon": "fa fa-file text-waring"
-                    }]
-                }, {
-                    "text": "Another Custom Icon",
-                    "icon": "flaticon2-bell-5 text-waring"
-                }, {
-                    "text": "Disabled Node",
-                    "icon": "fa fa-check text-success",
-                    "state": {
-                        "disabled": true
-                    }
-                }, {
-                    "text": "Sub Nodes",
-                    "icon": "fa fa-folder text-danger",
-                    "children": [{
-                            "text": "Item 1",
-                            "icon": "fa fa-file text-waring"
-                        },
-                        {
-                            "text": "Item 2",
-                            "icon": "fa fa-file text-success"
-                        },
-                        {
-                            "text": "Item 3",
-                            "icon": "fa fa-file text-default"
-                        },
-                        {
-                            "text": "Item 4",
-                            "icon": "fa fa-file text-danger"
-                        },
-                        {
-                            "text": "Item 5",
-                            "icon": "fa fa-file text-info"
-                        }
-                    ]
-                }]
+    e.preventDefault();
+
+        var data = JSON.stringify( $('#kt_tree_5').jstree(true).get_json('#', {flat:true}) ) ;
+
+        $.ajax({
+               type: 'POST',
+               url: $('#js_tree_form').attr('action'),
+               data: {
+                "_token": $('input[name="page_hierarchy_csrf_token"]').val(),
+                "data" : data
+               },
+               success: function(data) {
+                console.log(data);
+                location.reload();
+               }
+           }).fail(function (jqXHR, textStatus, error) {
+                            console.log(jqXHR);
+                            console.log(textStatus);
+                            console.log(error);
+
+                        });;
+    });
+
+
+    $('#page_hierarchy_js_tree_form_reset').on('click', function(e){
+        $('#kt_tree_5').jstree(true).refresh();
+    });
+
+    var page_hierarchy_json = JSON.parse($('input[name="page_hierarchy_json"]').val());
+    $("#kt_tree_5").jstree({
+        "core": {
+
+            "themes": {
+                "responsive": false
             },
-            "Another Node"
-        ]
-    },
-    "types": {
-        "default": {
-            "icon": "fa fa-folder text-success"
+            // so that create works
+            "check_callback": true,
+
+            "data" : page_hierarchy_json
+
         },
-        "file": {
-            "icon": "fa fa-file  text-success"
-        }
-    },
-    "state": {
-        "key": "demo2"
-    },
-    "plugins": ["dnd", "state", "types"]
+        "types": {
+            "default": {
+                "icon": "fa fa-folder text-success"
+            },
+            "file": {
+                "icon": "fa fa-file  text-success"
+            }
+        },
+        "state": {
+            "key": "demo2"
+        },
+        "plugins": ["dnd", "state", "types"]
+    });
 });
