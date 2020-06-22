@@ -1,34 +1,21 @@
 <x-master>
     <x-cards.basic-card title="New User Type" subtitle="Add a new type of User">
 
-        <form action="{{ route('usertype.store') }}" method="POST">
-        @csrf
-        @method('POST')
+        <x-form.form>
+            <x-slot name="form_tag">
+                <form action="{{ route('usertype.store') }}" method="POST" id="usertype_create_form">
+                    @csrf
+                    @method('POST')
+            </x-slot>
 
+            <x-form.form_group label="User Type Name" error="name">
+                <x-form.form_input type="text" name="name" placeholder="Enter User Type Name" />
+            </x-form.form_group>
 
-            <div class="card-body">
-                <div class="form-group">
-                    <label>Name:</label>
-                    <input type="text" name="name" class="form-control form-control-solid"  placeholder="User Type Name"/>
-                    <x-form.form_field_error field="name" />
-
-                </div>
-
-                <div class="form-group">
-                    <label>Description:</label>
-                    <input type="text" name="description" class="form-control form-control-solid"  placeholder="Description"/>
-                    <x-form.form_field_error field="description" />
-
-                </div>
-
-            </div>
-
-
-            <button type="submit" class="btn btn-primary mr-2">Submit</button>
-            <button type="reset" class="btn btn-secondary">Cancel</button>
-
-
-        </form>
+            <x-form.form_group label="Description" error="description">
+                <x-form.form_textarea name="description" placeholder="Enter User Type's Description" />
+            </x-form.form_group>
+        </x-form.form>
 
     </x-cards.basic-card>
 

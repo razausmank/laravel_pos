@@ -52,7 +52,12 @@ class ProductCategoryController extends MainController
     {
         $validated = $request->validated() ;
 
-        $productcategory->update( $validated );
+        $image_address = $request->file('image')->store('public/product_category');
+        unset($validated['image']);
+
+        $productcategory->update( $validated  + [
+            'image' => $image_address
+        ]);
 
         return redirect( route('productcategory.index') )->with('success', 'Product Category successfuly updated');
     }

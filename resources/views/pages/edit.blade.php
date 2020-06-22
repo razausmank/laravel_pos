@@ -1,68 +1,53 @@
 <x-master>
     <x-cards.basic-card title="Update Page" subtitle="Yo man this was hard">
 
-        <form action="{{ route('page.update', $page) }}" method="POST">
-        @csrf
-        @method('PATCH')
 
+        <x-form.form >
+            <x-slot name="form_tag">
+                <form action="{{ route('page.update', $page) }}" method="POST" id="page_edit_form">
+                    @csrf
+                    @method('PATCH')
+            </x-slot>
 
-            <div class="card-body">
-                <div class="form-group">
-                    <label>Name:</label>
-                    <input type="text" name="name" class="form-control form-control-solid"  placeholder="Enter page name" value="{{ $page->name }}" />
-                    <x-form.form_field_error field="name" />
+            <x-form.form_group label="Name" error="name">
+                <x-form.form_input type="text" name="name" placeholder="Enter Page Name" value="{{ $page->name }}"/>
+            </x-form.form_group>
 
-                </div>
-                <div class="form-group">
-                    <label>URL:</label>
-                    <select name="url" id="url_select" class="form-control form-control-solid">
+            <x-form.form_group label="URL" error="url">
+
+                <x-form.form_dropdown name="url" id="create_page_url_select" >
+
+                    <x-slot name="custom_element">
                         <option value="#" {{ $page->url == "#" ? 'selected' : '' }}>No Route</option>
                         @foreach ($routes as $route)
                             <option value="{{ $route }}" {{ $page->url == $route ? 'selected' : '' }}> {{ $route}} </option>
                         @endforeach
-                    </select>
-                    <x-form.form_field_error field="url" />
-                </div>
+                    </x-slot>
 
+                </x-form.form_dropdown>
 
-                <div class="form-group">
-                    <label>Description:</label>
-                    <input type="text" name="description" class="form-control form-control-solid"  placeholder="Enter page Description" value="{{ $page->description }}"/>
-                    <x-form.form_field_error field="description" />
+            </x-form.form_group>
 
-                </div>
+            <x-form.form_group label="Description" error="description">
+                <x-form.form_input type="text" name="description" placeholder="Enter Page Description" value="{{ $page->description }}" />
+            </x-form.form_group>
 
-                <div class="form-group">
-                    <label>Sort Order:</label>
-                    <input type="number" name="sort_order" class="form-control form-control-solid"  placeholder="Enter page Sort Order" value="{{ $page->sort_order }}"/>
-                    <x-form.form_field_error field="sort_order" />
+            <x-form.form_group label="Sort Order" error="sort_order">
+                <x-form.form_input type="number" name="sort_order" placeholder="Enter Page Sort Order" value="{{ $page->sort_order }}"/>
+            </x-form.form_group>
 
-                </div>
+            <x-form.form_group label="Parent Page" error="parent_page_id">
+                <x-form.form_dropdown name="parent_page_id" id="create_page_parent_page_select" :modeledit="$page->parent_page_id" :model="$pages"  dropdown_default_option="No Parent Page" />
+            </x-form.form_group>
 
-
-
-                <div class="form-group">
-                    <label>Parent Page :</label>
-                    <select name="parent_page_id" id="parent_page_select" class="form-control form-control-solid">
-                        <option value {{ $page->parent_page_id ? '' : 'selected'}} >No Parent Page</option>
-                        {{-- page_x because i already have a variable with name page  --}}
-                        @foreach ($pages as $page_x)
-                            <option value="{{ $page_x->id }}" {{ $page->parent_page_id == $page_x->id ? 'selected' : '' }}> {{ $page_x->name }} </option>
-                        @endforeach
-                    </select>
-                    <x-form.form_field_error field="parent_page_id" />
-
-                </div>
+        </x-form.form>
 
 
 
-            </div>
-
-            <button type="submit" class="btn btn-primary mr-2">Submit</button>
-            <button type="reset" class="btn btn-secondary">Cancel</button>
 
 
-        </form>
+
+
 
     </x-cards.basic-card>
 

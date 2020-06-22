@@ -2,60 +2,42 @@
 
     <x-cards.basic-card title="New Product" subtitle="A new world order blah blah ">
 
-        <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('POST')
+        <x-form.form>
+            <x-slot name="form_tag">
+                <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data" id="product_create_form">
+                    @csrf
+                    @method('POST')
+            </x-slot>
 
-                <div class="form-group">
-                    <label>Category Name:</label>
-                    <input type="text" name="name" class="form-control form-control-solid"  placeholder="Enter Product Category name"/>
-                    <x-form.form_field_error field="name" />
-                </div>
+            <x-form.form_group label="Product Name" error="name">
+                <x-form.form_input type="text" name="name" placeholder="Enter Product name" />
+            </x-form.form_group>
 
-                <div class="form-group">
-                    <label>Description:</label>
-                    <textarea type="text" name="description" class="form-control form-control-solid"  placeholder="Enter Product Category Description"></textarea>
-                    <x-form.form_field_error field="description" />
-                </div>
+            <x-form.form_group label="Description" error="description">
+                <x-form.form_textarea name="description" placeholder="Enter Product Description" />
+            </x-form.form_group>
 
-                <div class="form-group">
-                    <label>Barcode:</label>
-                    <input type="text" name="barcode" class="form-control form-control-solid"  placeholder="Enter Product Barcode" />
-                    <x-form.form_field_error field="barcode" />
-                </div>
+            <x-form.form_group label="Barcode" error="barcode">
+                <x-form.form_input type="text" name="barcode" placeholder="Enter Product Barcode" />
+            </x-form.form_group>
 
-                <div class="form-group">
-                    <label>Price:</label>
-                    <input type="number" step="0.01" name="price" class="form-control form-control-solid"  placeholder="Enter Product Price" />
-                    <x-form.form_field_error field="price" />
-                </div>
+            <x-form.form_group label="Price" error="price">
+                <x-form.form_input type="number" custom_attributes='step=0.01' name="price" placeholder="Enter Product Price" />
+            </x-form.form_group>
 
-                <div class="form-group">
-                    <label>Quantity:</label>
-                    <input type="number"  name="quantity" class="form-control form-control-solid"  placeholder="Enter Product Quantity" />
-                    <x-form.form_field_error field="quantity" />
-                </div>
+            <x-form.form_group label="Quantity" error="quantity">
+                <x-form.form_input type="number" name="quantity" placeholder="Enter Product Quantity" />
+            </x-form.form_group>
 
-                <div class="form-group">
-                    <label>Product Category:</label>
-                    <select name="product_category_id" id="product_category_select" class="form-control form-control-solid">
-                        @foreach ($product_categories as $product_category )
-                            <option value="{{ $product_category->id }}"> {{ $product_category->name }} </option>
-                        @endforeach
-                    </select>
-                    <x-form.form_field_error field="product_category_id" />
-                </div>
+            <x-form.form_group label="Product Category" error="product_category_id">
+                <x-form.form_dropdown name="product_category_id" id="product_create_product_category_select" :model="$product_categories" />
+            </x-form.form_group>
 
+            <x-form.form_group label="Image" error="image">
+                <x-form.form_image_input id="image_field" name="image" add_title="Add Product Image" remove_title="Remove Product Image" />
+            </x-form.form_group>
 
-
-                <div class="form-group">
-                    <label>Upload an Image:</label>
-                    <input type="file" name="image" class="form-control form-control-solid">
-                    <x-form.form_field_error field="image" />
-                </div>
-                <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                <button type="reset" class="btn btn-secondary">Cancel</button>
-        </form>
+        </x-form.form>
 
     </x-cards.basic-card>
 

@@ -5,14 +5,14 @@
     <x-cards.basic-card title="All Product Categories" subtitle="List of all product categories" button_link="productcategory.create" button_text="New Product Category">
 
 
-        <table class="table">
+        <table  class="table table-bordered table-hover table-checkable dataTable dtr-inline" style="width:100%" id="product_categories_table" >
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Created At</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Actions</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -21,18 +21,22 @@
                         <td>{{ $product_category->name }}</td>
                         <td>{{ $product_category->description }}</td>
                         <td>{{ $product_category->created_at->diffForHumans() }}</td>
-                        <td><a href="{{ route('productcategory.edit' , $product_category) }}" class="btn btn-primary mr-2">Edit</a></td>
-                        <td>
-                            <form action="{{ route('productcategory.destroy', $product_category) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                                <button type="submit" class="btn btn-danger mr-2">Delete</button>
-                            </form>
+                        <td class="d-flex">
+                            <a href="{{ route('productcategory.edit' , $product_category) }}" class="btn btn-sm btn-clean btn-icon" title="Edit">
+                                <i class="la la-edit"></i>
+                            </a>
 
+                            <form action="{{ route('productcategory.destroy', $product_category) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-clean btn-icon" title="Delete">
+                                    <i class="la la-trash"></i>
+                                </button>
+                            </form>
                         </td>
 
+
                     </tr>
-                    <img src="{{ asset(Storage::url($product_category->image)) }}" alt="">
                 @endforeach
             </tbody>
         </table>

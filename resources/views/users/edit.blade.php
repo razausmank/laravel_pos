@@ -1,65 +1,39 @@
 <x-master>
     <x-cards.basic-card title="New User" subtitle="Add a new user through here">
 
-        <form action="{{ route('user.update', $user ) }}" method="POST">
-        @csrf
-        @method('PATCH')
 
-            <div class="card-body">
-                <div class="form-group">
-                    <label>First Name:</label>
-                    <input type="text" name="first_name" class="form-control form-control-solid"  placeholder="Enter First Name" value="{{ $user->first_name }}"/>
-                    <x-form.form_field_error field="first_name" />
+        <x-form.form>
+            <x-slot name="form_tag">
+                <form action="{{ route('user.update', $user ) }}" method="POST" id="user_edit_form">
+                    @csrf
+                    @method('PATCH')
+            </x-slot>
 
-                </div>
+            <x-form.form_group label="First Name" error="first_name">
+                <x-form.form_input type="text" name="first_name" placeholder="Enter First Name" value="{{ $user->first_name }}"/>
+            </x-form.form_group>
 
-                <div class="form-group">
-                    <label>Last Name:</label>
-                    <input type="text" name="last_name" class="form-control form-control-solid"  placeholder="Enter Last Name" value="{{ $user->last_name }}"/>
-                    <x-form.form_field_error field="last_name" />
+            <x-form.form_group label="Last Name" error="last_name">
+                <x-form.form_input type="text" name="last_name" placeholder="Enter Last Name" value="{{ $user->last_name }}"/>
+            </x-form.form_group>
 
-                </div>
+            <x-form.form_group label="UserName" error="username">
+                <x-form.form_input type="text" name="username" placeholder="Enter Username" value="{{ $user->username }}"/>
+            </x-form.form_group>
 
-                <div class="form-group">
-                    <label>Username:</label>
-                    <input type="text" name="username" class="form-control form-control-solid"  placeholder="Enter Username" value="{{ $user->username }}"/>
-                    <x-form.form_field_error field="username" />
+            <x-form.form_group label="Email" error="email">
+                <x-form.form_input type="email" name="email" placeholder="Enter User's Email" value="{{ $user->email }}"/>
+            </x-form.form_group>
 
-                </div>
+            <x-form.form_group label="Password" error="password">
+                <x-form.form_input type="password" name="password" placeholder="Enter User's Password" />
+            </x-form.form_group>
 
-                <div class="form-group">
-                    <label>Email:</label>
-                    <input type="email" name="email" class="form-control form-control-solid"  placeholder="Enter User's Email" value="{{ $user->email }}"/>
-                    <x-form.form_field_error field="email" />
+            <x-form.form_group label="User Type" error="usertype_id">
+                <x-form.form_dropdown name="usertype_id" id="user_create_usertype_select" :model="$usertypes" :modeledit="$user->usertype_id" />
+            </x-form.form_group>
 
-                </div>
-
-                <div class="form-group">
-                    <label>Password:</label>
-                    <input type="password" name="password" class="form-control form-control-solid"  />
-                    <x-form.form_field_error field="password" />
-
-                </div>
-
-                <div class="form-group">
-                    <label>User Type :</label>
-                    <select name="usertype_id" id="user_type_select" class="form-control form-control-solid">
-                        @foreach ($usertypes as $usertype)
-                            <option value="{{ $usertype->id }}" {{ $user->usertype_id == $usertype->id ? 'selected' : ''}}> {{ $usertype->name }} </option>
-                        @endforeach
-                    </select>
-                    <x-form.form_field_error field="usertype_id" />
-
-                </div>
-
-            </div>
-
-
-            <button type="submit" class="btn btn-primary mr-2">Submit</button>
-            <button type="reset" class="btn btn-secondary">Cancel</button>
-
-
-        </form>
+        </x-form.form>
 
     </x-cards.basic-card>
 

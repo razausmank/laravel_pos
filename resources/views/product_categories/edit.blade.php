@@ -2,31 +2,32 @@
 
     <x-cards.basic-card title="New Product Category" subtitle="A new world order blah blah ">
 
-        <form action="{{ route('productcategory.update' , $productcategory ) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PATCH')
 
-                <div class="form-group">
-                    <label>Category Name:</label>
-                    <input type="text" name="name" class="form-control form-control-solid"  placeholder="Enter Product Category name" value="{{ $productcategory->name }}"/>
-                    <x-form.form_field_error field="name" />
-                </div>
+        <x-form.form>
+            <x-slot name="form_tag">
+                <form action="{{ route('productcategory.update' , $productcategory ) }}" method="POST" enctype="multipart/form-data" id="product_category_edit_form">
+                    @csrf
+                    @method('PATCH')
+            </x-slot>
 
-                <div class="form-group">
-                    <label>Description:</label>
-                    <textarea type="text" name="description" class="form-control form-control-solid"  placeholder="Enter Product Category Description" > {{ $productcategory->description }} </textarea>
-                    <x-form.form_field_error field="description" />
-                </div>
+            <x-form.form_group label="Category Name" error="name">
+                <x-form.form_input type="text" name="name" placeholder="Enter Product Category name" value="{{ $productcategory->name }}"/>
+            </x-form.form_group>
 
-                <div class="form-group">
-                    <label>Upload an Image:</label>
-                    <input type="file" name="image" class="form-control form-control-solid">
-                    <x-form.form_field_error field="image" />
-                </div>
-                <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                <button type="reset" class="btn btn-secondary">Cancel</button>
-        </form>
+            <x-form.form_group label="Description" error="description">
+                <x-form.form_textarea name="description" placeholder="Enter Product Category Description" value="{{ $productcategory->description }}"/>
+            </x-form.form_group>
+
+            <x-form.form_group label="Image" error="image">
+                <x-form.form_image_input id="image_field" name="image" add_title="Add Product Category Image" remove_title="Remove Product Category Image" :image="$productcategory->image"/>
+            </x-form.form_group>
+
+
+        </x-form.form>
+
 
     </x-cards.basic-card>
 
 </x-master>
+
+

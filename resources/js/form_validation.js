@@ -1,6 +1,8 @@
 
 module.exports = {
 
+
+    
     /* Validate is the main Function, it takes 3 inputs one of which is optional
     the first input is the form id
     the second input takes an object which defines the fields to be validated and the type of validations each field will have with a custom message for each validation type
@@ -31,14 +33,13 @@ module.exports = {
     make_form_data : function( form_data ) {
 
         var fields_with_validators = {};
-
         for ( var field_name in form_data )
         {
             fields_with_validators[field_name] = { validators : {} } ;
 
             for ( var key in form_data[field_name] )
             {
-                fields_with_validators[field_name].validators[key] = { "message" : form_data[field_name][key] }
+                fields_with_validators[field_name].validators[key] =  form_data[field_name][key] ;
             }
         }
 

@@ -27,6 +27,9 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!--end::Fonts-->
 
+        <!--dataTable-->
+        <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css?v=7.0.5') }}" rel="stylesheet" type="text/css">
+
 		<!--begin::Page Vendors Styles(used by this page)-->
 		<link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
 
@@ -161,6 +164,9 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!-- jstree -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/jstree.min.js"></script>
+
+        <!-- DataTables -->
+        <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js?v=7.0.5') }}"></script>
 
 	</body>
 

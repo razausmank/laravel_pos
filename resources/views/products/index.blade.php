@@ -3,7 +3,7 @@
     <x-flash />
 
     <x-cards.basic-card title="All Products" subtitle="List of all producs" button_link="product.create" button_text="New Product">
-        <table class="table">
+        <table class="table table-bordered table-hover table-checkable dataTable dtr-inline" style="width:100%" id="products_table">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -13,8 +13,7 @@
                     <th>Quantity</th>
                     <th>Product Category</th>
                     <th>Created At</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,15 +28,20 @@
 
 
                         <td>{{ $product->created_at->diffForHumans() }}</td>
-                        <td><a href="{{ route('product.edit' , $product) }}" class="btn btn-primary mr-2">Edit</a></td>
-                        <td>
-                            <form action="{{ route('product.destroy', $product) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                                <button type="submit" class="btn btn-danger mr-2">Delete</button>
-                            </form>
+                        <td class="d-flex">
+                            <a href="{{ route('product.edit' , $product) }}" class="btn btn-sm btn-clean btn-icon" title="Edit">
+                                <i class="la la-edit"></i>
+                            </a>
 
+                            <form action="{{ route('product.destroy', $product) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-clean btn-icon" title="Delete">
+                                    <i class="la la-trash"></i>
+                                </button>
+                            </form>
                         </td>
+
                     </tr>
                 @endforeach
             </tbody>
@@ -47,7 +51,7 @@
 
     <x-cards.basic-card title="User's Profile Details">
 
-        <x-form.form title="testing">
+        <x-form.form >
             <x-slot name="form_tag">
                 <form action="#" method="POST">
                     @csrf

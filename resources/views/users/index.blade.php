@@ -1,6 +1,7 @@
 <x-master>
     <x-cards.basic-card title="All users" subtitle="List of all users" button_link="user.create" button_text="New User">
-        <table class="table">
+        <table class="table table-bordered table-hover table-checkable dataTable dtr-inline" style="width:100%" id="users_table">
+
             <thead>
                 <tr>
                     <th>First Name</th>
@@ -9,9 +10,7 @@
                     <th>Email</th>
                     <th>User Type</th>
                     <th>Created At</th>
-                    <th>Page Permissions</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,16 +22,24 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->usertype  ?  $user->usertype->name  : '---'}}</td>
                         <td>{{ $user->created_at->diffForHumans() }}</td>
-                        <td><a href="{{ route('user.page_permissions' , $user) }}" class="btn btn-success mr-2">Permissions</a></td>
-                        <td><a href="{{ route('user.edit' , $user) }}" class="btn btn-primary mr-2">Edit</a></td>
-                        <td>
-                            <form action="{{ route('user.destroy', $user) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                                <button type="submit" class="btn btn-danger mr-2">Delete</button>
-                            </form>
+                        <td class="d-flex">
+                            <a href="{{ route('user.page_permissions' , $user) }}" class="btn btn-sm btn-clean btn-icon" title="Page Permissions">
+                                <i class="la la-cog"></i>
+                            </a>
 
+                            <a href="{{ route('user.edit' , $user) }}" class="btn btn-sm btn-clean btn-icon" title="Edit">
+                                <i class="la la-edit"></i>
+                            </a>
+
+                            <form action="{{ route('user.destroy', $user) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-clean btn-icon" title="Delete">
+                                    <i class="la la-trash"></i>
+                                </button>
+                            </form>
                         </td>
+
                     </tr>
                 @endforeach
             </tbody>

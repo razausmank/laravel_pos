@@ -1,5 +1,5 @@
 
-<input class="form-control form-control-lg form-control-solid {{ $attributes['class'] ?? ''}}"
+<input class="form-control  {{ $attributes['class'] ?? ''}}"
 
     @if( $attributes['name'] )
         name = "{{ $attributes['name']  }}"

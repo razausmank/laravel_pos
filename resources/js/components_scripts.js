@@ -10,7 +10,7 @@ $('#page_hierarchy_js_tree_form_submit').on('click', function(e){
 
         $.ajax({
                type: 'POST',
-               url: $('#js_tree_form').attr('action'),
+               url: $('#page_hierarchy_form').attr('action'),
                data: {
                 "_token": $('input[name="page_hierarchy_csrf_token"]').val(),
                 "data" : data

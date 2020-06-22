@@ -98,8 +98,6 @@ __webpack_require__(/*! ./config */ "./resources/js/config.js");
 
 __webpack_require__(/*! ./components_scripts */ "./resources/js/components_scripts.js");
 
-var FormValidator = __webpack_require__(/*! ./form_validation */ "./resources/js/form_validation.js");
-
 __webpack_require__(/*! ./page_specific */ "./resources/js/page_specific.js"); // {
 //     trigger: new FormValidation.plugins.Trigger(),
 //     // Bootstrap Framework Integration
@@ -128,7 +126,7 @@ $(document).ready(function () {
     }));
     $.ajax({
       type: 'POST',
-      url: $('#js_tree_form').attr('action'),
+      url: $('#page_hierarchy_form').attr('action'),
       data: {
         "_token": $('input[name="page_hierarchy_csrf_token"]').val(),
         "data": data
@@ -247,9 +245,7 @@ module.exports = {
       };
 
       for (var key in form_data[field_name]) {
-        fields_with_validators[field_name].validators[key] = {
-          "message": form_data[field_name][key]
-        };
+        fields_with_validators[field_name].validators[key] = form_data[field_name][key];
       }
     }
 
@@ -276,23 +272,120 @@ module.exports = {
   !*** ./resources/js/page_specific.js ***!
   \***************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-// main master Component
+var FormValidator = __webpack_require__(/*! ./form_validation */ "./resources/js/form_validation.js"); // main master Component
+
+
 $('#logout_button').on('click', function (event) {
   event.preventDefault();
   $('#logout_form').submit();
 });
-FormValidator.validate("kt_form_1", {
-  "email": {
-    "notEmpty": "Email is required modified",
-    "emailAddress": "The value is not a valid email address modified"
+var image_field = new KTImageInput('image_field'); // Create Product Category
+// Edit Product Category
+
+$(document).ready(function () {
+  $('#page_table').DataTable();
+  $('#product_categories_table').DataTable();
+  $('#products_table').DataTable();
+  $('#users_table').DataTable();
+  $('#usertypes_table').DataTable();
+}); // $(document).ready(function() {
+//     var groupColumn = 1;
+//     var table = $('#PageTable').DataTable({
+//         "columnDefs": [
+//             { "visible": false, "targets": groupColumn }
+//         ],
+//         "order": [[ groupColumn, 'asc' ]],
+//         "displayLength": 25,
+//         "drawCallback": function ( settings ) {
+//             var api = this.api();
+//             var rows = api.rows( {page:'current'} ).nodes();
+//             var last=null;
+//             api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+//                 if ( last !== group ) {
+//                     $(rows).eq( i ).before(
+//                         '<tr class="group"><td colspan="7">'+group+'</td></tr>'
+//                     );
+//                     last = group;
+//                 }
+//             } );
+//         }
+//     } );
+//     // Order by the grouping
+//     $('#PageTable tbody').on( 'click', 'tr.group', function () {
+//         var currentOrder = table.order()[0];
+//         if ( currentOrder[0] === groupColumn && currentOrder[1] === 'asc' ) {
+//             table.order( [ groupColumn, 'desc' ] ).draw();
+//         }
+//         else {
+//             table.order( [ groupColumn, 'asc' ] ).draw();
+//         }
+//     } );
+// } );
+// Product Create Image
+// Create page
+
+$(document).ready(function () {
+  FormValidator.validate("kt_form_1", {
+    "url": {
+      "stringLength": {
+        "min": "50",
+        "max": "100",
+        "message": 'Please enter a menu within text length range 50 and 100'
+      }
+    }
+  });
+}); // testing
+// Class definition
+
+var KTSelect2 = function () {
+  var demos = function demos() {
+    // basic
+    $('#user_create_usertype_select').select2({
+      placeholder: "Select a state"
+    }); // nested
+
+    $('#kt_select2_2').select2({
+      placeholder: "Select a state"
+    }); // multi select
+
+    $('#kt_select2_3_validate').select2({
+      placeholder: "Select a state"
+    });
+  }; // Public functions
+
+
+  return {
+    init: function init() {
+      demos();
+    }
+  };
+}(); // Initialization
+
+
+jQuery(document).ready(function () {
+  KTSelect2.init();
+});
+FormValidator.validate("page_create_form", {
+  "name": {
+    "notEmpty": {
+      "message": "Name is required"
+    },
+    "emailAddress": {
+      "message": "The value is not a valid email address modified"
+    }
   },
   "url": {
-    "notEmpty": "Url is required :)",
-    "uri": "this is mad"
+    "notEmpty": {
+      "message": "Url is required :)"
+    },
+    "uri": {
+      "message": "this is mad"
+    }
   }
 });
+alert('hello');
 
 /***/ }),
 

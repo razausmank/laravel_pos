@@ -1,12 +1,11 @@
 // require('./bootstrap');
 
-
 require('./config');
 require('./components_scripts');
 
-
-let FormValidator = require('./form_validation');
 require('./page_specific');
+
+
 
 
 // {
@@ -18,3 +17,4 @@ require('./page_specific');
 //                                     // Submit the form when all fields are valid
 //     defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
 // }
+

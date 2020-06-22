@@ -15,8 +15,8 @@
                             {{ $custom_element ?? '' }}
                         </div>
                         <div>
-                            <button type="reset" class="btn btn-secondary font-weight-bolder px-9 py-4" >Cancel</button>
-                            <button type="submit" class="btn btn-success font-weight-bolder px-9 py-4" >Submit</button>
+                            <button type="reset" id="{{ $attributes['reset_button_id'] ?? ''}}" class="btn btn-secondary font-weight-bolder px-9 py-4" >Cancel</button>
+                            <button type="submit" id="{{ $attributes['submit_button_id'] ?? ''}}" class="btn btn-success font-weight-bolder px-9 py-4" >Submit</button>
 
                         </div>
                     </div>
