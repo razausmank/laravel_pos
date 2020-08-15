@@ -20,6 +20,6 @@
     {{ $attributes['custom_attributes'] ?? ''}}
 >
 @if( $attributes['value'] )
-   {{ $attributes['value']  }}
+{{ $attributes['value']  }}
 @endif</textarea>
 

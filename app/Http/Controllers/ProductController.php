@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Product;
 use App\ProductCategory;
+use App\ProductStock;
+use App\Remark;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -38,8 +40,17 @@ class ProductController extends MainController
         unset($validated['image']);
 
 
-        Product::create($validated + [
+        $product = Product::create($validated + [
             'image' => $image_address
+        ]);
+        ProductStock::create([
+            "product_id" => $product->id,
+            "quantity" => $product->quantity,
+            'remark_id' =>Remark::create([
+                'description' => "Product ( $product->name ) initialized with stock quantity of ( $product->quantity )" ,
+                'entity_id' => $product->id,
+                'entity_type_id' => 1
+            ])->id
         ]);
 
         return redirect( route('product.index') )->with('success', 'Product successfuly created');
@@ -58,6 +69,16 @@ class ProductController extends MainController
         $validated = $request->validated() ;
 
         $product->update( $validated );
+
+        ProductStock::create([
+            "product_id" => $product->id,
+            "quantity" => $product->quantity,
+            'remark_id' =>Remark::create([
+                'description' => "Product ( $product->name ) updated with stock quantity of ( $product->quantity )" ,
+                'entity_id' => $product->id,
+                'entity_type_id' => 1
+            ])->id
+        ]);
 
         return redirect( route('product.index') )->with('success', 'Productsuccessfuly updated');
     }

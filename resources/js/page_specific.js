@@ -26,46 +26,48 @@ $(document).ready(function() {
     $('#products_table').DataTable();
     $('#users_table').DataTable();
     $('#usertypes_table').DataTable();
+    $('#customer_types_table').DataTable();
+    $('#customer_table').DataTable();
+    $('#stores_table').DataTable();
 
+
+        var groupColumn = 0;
+        var table = $('#product_stocks_table').DataTable({
+            "columnDefs": [
+                { "visible": false, "targets": groupColumn }
+            ],
+            "order": [[ groupColumn, 'asc' ]],
+            "displayLength": 25,
+            "drawCallback": function ( settings ) {
+                var api = this.api();
+                var rows = api.rows( {page:'current'} ).nodes();
+                var last=null;
+
+                api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+                    if ( last !== group ) {
+                        $(rows).eq( i ).before(
+                            '<tr class="group"><td colspan="7" ><div class="d-flex justify-content-between font-weight-bolder  font-size-lg">'+group+'</div></td></tr>'
+                        );
+
+                        last = group;
+                    }
+                } );
+            }
+        } );
+
+        // Order by the grouping
+        $('#product_stocks_table tbody').on( 'click', 'tr.group', function () {
+            var currentOrder = table.order()[0];
+            if ( currentOrder[0] === groupColumn && currentOrder[1] === 'asc' ) {
+                table.order( [ groupColumn, 'desc' ] ).draw();
+            }
+            else {
+                table.order( [ groupColumn, 'asc' ] ).draw();
+            }
+        } );
 
 } );
 
-// $(document).ready(function() {
-//     var groupColumn = 1;
-//     var table = $('#PageTable').DataTable({
-//         "columnDefs": [
-//             { "visible": false, "targets": groupColumn }
-//         ],
-//         "order": [[ groupColumn, 'asc' ]],
-//         "displayLength": 25,
-//         "drawCallback": function ( settings ) {
-//             var api = this.api();
-//             var rows = api.rows( {page:'current'} ).nodes();
-//             var last=null;
-
-//             api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
-//                 if ( last !== group ) {
-//                     $(rows).eq( i ).before(
-//                         '<tr class="group"><td colspan="7">'+group+'</td></tr>'
-//                     );
-
-//                     last = group;
-//                 }
-//             } );
-//         }
-//     } );
-
-//     // Order by the grouping
-//     $('#PageTable tbody').on( 'click', 'tr.group', function () {
-//         var currentOrder = table.order()[0];
-//         if ( currentOrder[0] === groupColumn && currentOrder[1] === 'asc' ) {
-//             table.order( [ groupColumn, 'desc' ] ).draw();
-//         }
-//         else {
-//             table.order( [ groupColumn, 'asc' ] ).draw();
-//         }
-//     } );
-// } );
 // Product Create Image
 
 
@@ -135,20 +137,19 @@ jQuery(document).ready(function() {
 
 
 
-FormValidator.validate(
-    "page_create_form" ,
-    {
-        "name" : {
-            "notEmpty" : {"message" :"Name is required"} ,
-            "emailAddress" :{ "message" : "The value is not a valid email address modified" }
-        },
-        "url" : {
-            "notEmpty" : { "message" : "Url is required :)" } ,
+// FormValidator.validate(
+//     "page_create_form" ,
+//     {
+//         "name" : {
+//             "notEmpty" : {"message" :"Name is required"} ,
+//             "emailAddress" :{ "message" : "The value is not a valid email address modified" }
+//         },
+//         "url" : {
+//             "notEmpty" : { "message" : "Url is required :)" } ,
 
-            "uri" : {"message" :"this is mad" },
+//             "uri" : {"message" :"this is mad" },
 
-        },
-    },
+//         },
+//     },
 
-);
-alert('hello');
+// );

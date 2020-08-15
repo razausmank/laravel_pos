@@ -10,19 +10,23 @@ class ProductStock extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'description',
         'quantity',
+        'product_id',
+        'remark_id',
         'created_by',
         'updated_by',
         'deleted_by',
-        'product_id'
     ];
-
 
     // ORM Relationships
 
     public function product()
     {
-        return $this->belongsTo( Prodcut::class );
+        return $this->belongsTo( Product::class );
+    }
+
+    public function remark()
+    {
+        return $this->belongsTo( Remark::class );
     }
 }

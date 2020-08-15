@@ -4,9 +4,7 @@ https://github.com/alexeymezenin/laravel-best-practices#store-dates-in-the-stand
 
 user updating requires password and that is a bit of a problem solve that , maybe remove the password field from there
 
-
 the top most of the menu bar is still not clickable
-
 check the price column in product , it goes out of range
 
 
@@ -15,4 +13,13 @@ things to do
 - after revising javascript make the validation.js file into a class or an object so we can use it multiple times in a single page
 - then apply validation for all forms and select2 for dropdowns
 - add datatables to all indexes, maybe make a class for datatables in the future
--
+
+
+soft delete doesn't checks for fk integrity so we can potentially delete data that is referenced in some other table
+forms are not being submitted without pictures
+adding no images on update sets the images to null
+
+
+question to ask
+==================
+- why create a remark at all why not just add a field in the database ?

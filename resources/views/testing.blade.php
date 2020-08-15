@@ -1,4 +1,8 @@
 <x-master>
+    <x-cards.basic-card title="autocomplete">
+        <input id="autoComplete" tabindex="1">    <!-- Default "id" value = "autoComplete"> -->
+        <li id="food_list"></li>
+    </x-cards.basic-card>
     <x-cards.basic-card title="Validation">
         <form class="form" id="kt_form_1">
             <div class="form-group row">
@@ -755,7 +759,6 @@
             </form>
             <!--end::Form-->
         </div>
-
 
 
 </x-master>

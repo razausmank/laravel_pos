@@ -10,6 +10,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
+                    <th>No. of Products </th>
                     <th>Created At</th>
                     <th>Actions</th>
 
@@ -18,8 +19,9 @@
             <tbody>
                 @foreach ($product_categories as $product_category)
                     <tr>
-                        <td>{{ $product_category->name }}</td>
+                        <td><a href="{{ route('productcategory.show' , $product_category ) }}">{{ $product_category->name }}</a></td>
                         <td>{{ $product_category->description }}</td>
+                        <td>{{ $product_category->products->count() }}</td>
                         <td>{{ $product_category->created_at->diffForHumans() }}</td>
                         <td class="d-flex">
                             <a href="{{ route('productcategory.edit' , $product_category) }}" class="btn btn-sm btn-clean btn-icon" title="Edit">

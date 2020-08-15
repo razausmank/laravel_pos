@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,6 +26,20 @@ Route::resource('product', 'ProductController');
 //Product Category Routes
 Route::resource('productstock', 'ProductStockController');
 
+//Customer Types Routes
+Route::resource('customertype', 'CustomerTypeController');
+
+// Customer Routes
+Route::resource('customer', 'CustomerController');
+
+//EntityType Routes
+Route::resource('entitytype', 'EntityTypeController');
+
+//Remark Routes
+Route::resource('remark', 'RemarkController');
+
+//Store Routes
+Route::resource('store', 'StoreController');
 
 //Main controller
 Route::get('/home', 'MainController@home')->name('home');
@@ -33,6 +48,7 @@ Route::get('/home', 'MainController@home')->name('home');
 
 Route::post('/testing_post_route','MainController@testing_post_route')->name('testing_post_route');
 Route::get('/testing', 'MainController@testing')->name('testing');
-
+Route::get('/', 'MainController@testing');
+Route::get('/get_test_data', 'MainController@test_data');
 Auth::routes();
 

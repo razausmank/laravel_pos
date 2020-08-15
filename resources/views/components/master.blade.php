@@ -49,6 +49,9 @@ License: You must have a valid license purchased only from themeforest(the above
 
          <!-- jstree -->
          <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/themes/default/style.min.css" />
+
+        <!-- autocomplete css -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
 	</head>
 
 	<!--end::Head-->
@@ -156,6 +159,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="{{ asset('assets/js/pages/widgets.js') }}"></script>
 
         <!--end::Page Scripts-->
+
+        <!-- autocomplete -->
+        <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
 
         <!-- compiled js app.js -->
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>

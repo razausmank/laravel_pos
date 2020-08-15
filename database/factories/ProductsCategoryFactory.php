@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(ProductCategory::class, function (Faker $faker) {
     return [
-        //
+        'name' => $faker->domainName,
+        'description' => $faker->paragraph
     ];
 });

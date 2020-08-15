@@ -25,7 +25,7 @@ class PageController extends MainController
 
           // gets all the routes and filters out only the index and create routes
           $routes = collect(app('routes')->getRoutes())->map(function ($route) {
-            if (preg_match('(edit|show|update|destroy|store|ignition)', $route->getName() ) === 1 )
+            if (preg_match('(.edit|.show|.update|.destroy|.store|ignition)', $route->getName() ) === 1 )
             {
                 return false ;
             }
